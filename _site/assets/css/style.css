@@ -206,9 +206,9 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 .highlight .ss { color: #90a959; }
 
-body { padding: 0px 0 20px 0px; margin: 0px; font: 14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif; color: #585858; font-weight: normal; background: #ffffff; background-attachment: fixed !important; }
+body { padding: 0px 0 20px 0px; margin: 0px; font: 14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #585858; font-weight: normal; background: #ffffff; background-attachment: fixed !important; }
 
-h1, h2, h3, h4, h5, h6 { color: #242424; margin: 0 0 10px; font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; }
+h1, h2, h3, h4, h5, h6 { color: #242424; margin: 0 0 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; }
 
 p, ul, ol, table, pre, dl { margin: 0 0 20px; }
 
@@ -217,10 +217,11 @@ h1, h2, h3 { line-height: 1.1; }
 h1 { font-size: 28px; }
 
 h2 { font-size: 21px; }
+h2.postlist { font-size: 24px; }
 
 h4, h5, h6 { color: #242424; }
 
-h3 { font-size: 18px; line-height: 24px; font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif !important; font-weight: normal; color: #535353; }
+h3 { font-size: 18px; line-height: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; color: #535353; }
 
 a { color: #4e9a06; font-weight: 400; text-decoration: none; }
 a.nu { font-size: 30px; word-spacing: normal; }
@@ -229,9 +230,9 @@ a:hover { color: #4ec526; }
 
 a small { font-size: 11px; color: #555; margin-top: -0.6em; display: block; }
 
-ul { list-style-type: square; color: #555; }
+ul { list-style-type: circle; color: #555; }
 
-strong { font-family: 'OpenSansBold', "Helvetica Neue", Helvetica, Arial, sans-serif !important; font-weight: normal; }
+strong { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; }
 
 .wrapper { max-width: 650px; margin: 0 auto; position: relative; padding: 0 20px; }
 
@@ -239,18 +240,18 @@ section img { max-width: 100%; border-radius: 5px; }
 
 blockquote { border-left: 3px solid #4e9a06; margin: 0; padding: 0 0 0 20px; font-style: italic; }
 
-code { font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace; color: #282828; font-size: 13px; margin: 0 4px; padding: 4px 6px; border-radius: 2px; }
+code { font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, monospace; color: #282828; font-size: 13px; margin: 0 4px; padding: 2px 4px; border-radius: 5px; background: #eeeeee; }
 
 pre { padding: 8px 15px; background: #333; border-radius: 5px; border: 1px solid #121212; box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3); overflow: auto; overflow-y: hidden; }
-pre code { color: #efefef; text-shadow: 0px 1px 0px #000; margin: 0; padding: 0; }
+pre code { color: #efefef; background: #333; text-shadow: 0px 1px 0px #000; margin: 0; padding: 0; }
 
 table { width: 100%; border-collapse: collapse; }
 
 #header { z-index: 100; left: 0; top: 0px; height: 60px; width: 100%; position: fixed; background: url(../images/nav-bg.gif) #353535; border-bottom: 4px solid #434343; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); }
 #header nav { max-width: 650px; margin: 2px auto; padding: 0 0px; background: none; margin: 12px auto; font-size: 22px; border: none; border-radius: 5px; text-align: left; border-bottom-width: 50px; }
 #header nav a { margin-left: 25px; }
-#header nav li { font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; list-style: none; display: inline; color: white; line-height: 50px; text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2); font-size: 14px; }
-#header nav li a { color: #fff; border: 1px solid none; border-radius: 5px; background: #4e9a06; border-radius: 5px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7); word-spacing: 2px; background-color: #4e9a06; padding: 4px 6px; padding-top: 8px; padding-bottom: 4px; font-size: 15px; text-align: center; }
+#header nav li { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; list-style: none; display: inline; color: white; line-height: 50px; text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2); font-size: 14px; }
+#header nav li a { color: #fff; border: 1px solid none; border-radius: 5px; background: #4e9a06; border-radius: 5px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7); word-spacing: 2px; background-color: #4e9a06; padding: 4px 6px; padding-top: 4px; padding-bottom: 4px; font-size: 15px; text-align: center; }
 #header nav li a:hover { background: #4ec526; background-color: #4ec526; border: 1px solid none; border-radius: 5px; box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0); }
 #header nav li.button { float: right; margin-left: 0px; size: 12px; border-radius: 5px; top: 5px; margin-top: -5px; }
 #header nav li.downloads { float: right; margin-left: 6px; }
@@ -265,7 +266,7 @@ footer .author img { border-radius: 8px; }
 
 section { max-width: 650px; padding: 30px 0px 50px 0px; margin: 20px 0; margin-top: 70px; }
 section #title { border: 0; outline: none; margin: 0 0 50px 0; padding: 0 0 5px 0; }
-section #title h1 { font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; font-size: 40px; text-align: center; line-height: 36px; }
+section #title h1 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; font-size: 40px; text-align: center; line-height: 36px; }
 section #title p { color: #d7cfbe; font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; font-size: 18px; text-align: center; }
 section #title .credits { font-size: 11px; font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; color: #696969; margin-top: -10px; }
 section #title .credits.left { float: left; }

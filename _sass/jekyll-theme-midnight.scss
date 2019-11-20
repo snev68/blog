@@ -6,6 +6,7 @@ body {
   padding:0px 0 20px 0px;
   margin: 0px;
   font:14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   //color: #f0e7d5
   color:#585858;
   font-weight: normal;
@@ -19,7 +20,7 @@ h1, h2, h3, h4, h5, h6 {
   //color:#e8e8e8;
   color: #242424;
   margin:0 0 10px;
-  font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: normal;
 }
 
@@ -38,6 +39,9 @@ h1 {
 
 h2 {
   font-size: 21px;
+  &.postlist {
+    font-size: 24px;
+  }
 }
 
 h4, h5, h6 {
@@ -47,7 +51,7 @@ h4, h5, h6 {
 h3 {
   font-size: 18px;
   line-height: 24px;
-  font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: normal;
   color: #535353;
 }
@@ -79,12 +83,12 @@ a small {
 }
 
 ul{
-  list-style-type: square;
+  list-style-type: circle;
   color: #555;
 }
 
 strong {
-  font-family: 'OpenSansBold', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-weight: normal;
 }
 
@@ -112,8 +116,9 @@ code {
   color:#282828;
   font-size:13px;
   margin: 0 4px;
-  padding: 4px 6px;
-  border-radius: 2px;
+  padding: 2px 4px;
+  border-radius: 5px;
+  background: #eeeeee;
   //background: #333;
 }
 
@@ -128,6 +133,7 @@ pre {
 
   code {
     color: #efefef;
+    background: #333;
     text-shadow: 0px 1px 0px #000;
     margin: 0;
     padding: 0;
@@ -167,7 +173,7 @@ table {
     }
 
     li {
-      font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       font-weight: normal;
       list-style: none;
       display: inline;
@@ -186,7 +192,7 @@ table {
         word-spacing: 2px;
         background-color: #4e9a06;
         padding: 4px 6px;
-        padding-top: 8px;
+        padding-top: 4px;
         padding-bottom: 4px;
         font-size:15px;
         text-align:center;
@@ -281,7 +287,7 @@ section {
     padding: 0 0 5px 0;
 
     h1 {
-      font-family: 'OpenSansLight', "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       font-weight: normal;
       font-size: 40px;
       text-align: center;
