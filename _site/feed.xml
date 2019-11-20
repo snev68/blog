@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-20T12:50:39+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Nu Blog</title><subtitle>Blog to the Nu project.</subtitle><entry><title type="html">Nushell 0.5.0</title><link href="http://localhost:4000/2019/11/05/nushell-0_5_0.html" rel="alternate" type="text/html" title="Nushell 0.5.0" /><published>2019-11-05T00:00:00+01:00</published><updated>2019-11-05T00:00:00+01:00</updated><id>http://localhost:4000/2019/11/05/nushell-0_5_0</id><content type="html" xml:base="http://localhost:4000/2019/11/05/nushell-0_5_0.html">&lt;p&gt;Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.&lt;/p&gt;
+
+&lt;p&gt;Today, we’re happy to announce the 0.5.0 release for Nu. We’ve got lots of new features, including some long-requested ones, in this release.&lt;/p&gt;
+
+&lt;h1 id=&quot;where-to-get-it&quot;&gt;Where to get it&lt;/h1&gt;
+
+&lt;p&gt;Nu 0.5.0 is available as &lt;a href=&quot;https://github.com/nushell/nushell/releases/tag/0_5_0&quot;&gt;pre-built binaries&lt;/a&gt; or from &lt;a href=&quot;https://crates.io/crates/nu&quot;&gt;crates.io&lt;/a&gt;. If you have Rust installed you can install it using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +beta install nu&lt;/code&gt; (or if you want all the features &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +beta install nu --all-features&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h1 id=&quot;nu-as-a-login-shell-jonathandturner&quot;&gt;Nu as a login shell (jonathandturner)&lt;/h1&gt;
+
+&lt;p&gt;One of the key features that landed in 0.5.0 is set of new capabilities that work together to allow you to use Nu as a login shell, completely independent of bash or other hosting shells.  For this, we’ve built in support for querying and updating the environment variables and the path.&lt;/p&gt;
+
+&lt;p&gt;To get started, you’ll need to first copy the environment you’re using into the config. Luckily, we’ve also made some improvements there:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; config --set [path $nu:path]
+&amp;gt; config --set [env $nu:env]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Once these values are set, you’ll be able to use Nu as your login shell.&lt;/p&gt;
+
+&lt;h2 id=&quot;new-variables&quot;&gt;New variables&lt;/h2&gt;
+
+&lt;p&gt;As you saw above, we’ve added a few new built-in variables. These will let you know what the current values that Nu can see are for your environment, path, and the config itself.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; echo $nu:env
+&amp;gt; echo $nu:path
+&amp;gt; echo $nu:config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;adding-paths-to-your-path&quot;&gt;Adding paths to your PATH&lt;/h2&gt;
+
+&lt;p&gt;One of the first things you’ll notice is that the new $nu:path is structured. If you run the echo above, you might see something like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; echo $nu:path
+━━━┯━━━━━━━━━━━━━━━━━━
+ # │ &amp;lt;value&amp;gt; 
+───┼──────────────────
+ 0 │ /usr/local/sbin 
+ 1 │ /usr/local/bin 
+ 2 │ /usr/sbin 
+ 3 │ /usr/bin 
+ 4 │ /sbin 
+ 5 │ /bin 
+ 6 │ /usr/games 
+ 7 │ /usr/local/games 
+ 8 │ /snap/bin 
+━━━┷━━━━━━━━━━━━━━━━━━
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ve added two new commands: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prepend&lt;/code&gt; for adding items to the start of a table and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;append&lt;/code&gt; for adding items to the end of a table.  With these commands, we can now query out the path, update it, and save it back.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; echo $nu:path | prepend &quot;/my/new/directory&quot; | config --set_into path
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;adding-variables-to-your-environment&quot;&gt;Adding variables to your environment&lt;/h2&gt;
+
+&lt;p&gt;You can use a similar set of steps to add new variables, or change existing variables, in your environment.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; echo $nu:env | insert GREETING hello_world | config --set_into env
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;Note: the previous &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;add&lt;/code&gt; command of previous releases has been renamed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;insert&lt;/code&gt; to remove confusion with mathematical functions.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;on-going-improvements&quot;&gt;On-going improvements&lt;/h1&gt;
+
+&lt;p&gt;We’re continuing to improve the commands we currently ship as part of Nu. Here are a few you might find helpful:&lt;/p&gt;
+
+&lt;h2 id=&quot;substrings-flare576&quot;&gt;Substrings (Flare576)&lt;/h2&gt;
+
+&lt;p&gt;The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;str&lt;/code&gt; command now supports being able to retrieve a substring from the strings given, so you could return, for example, the first 5 characters and stop after that.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ls | get name
+━━━━┯━━━━━━━━━━━━━━━━━━━━
+ #  │ &amp;lt;value&amp;gt; 
+────┼────────────────────
+  0 │ target 
+  1 │ CODE_OF_CONDUCT.md 
+  2 │ .cargo 
+  3 │ src 
+  4 │ features.toml 
+  5 │ rustfmt.toml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ls | get name | str --substring &quot;0,3&quot;
+━━━━┯━━━━━━━━━
+ #  │ &amp;lt;value&amp;gt; 
+────┼─────────
+  0 │ tar 
+  1 │ COD 
+  2 │ .ca 
+  3 │ src 
+  4 │ fea 
+  5 │ rus 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;recycling-jdvr&quot;&gt;Recycling (jdvr)&lt;/h2&gt;
+
+&lt;p&gt;Ever wish you could &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; things, but not forever? You can now tell &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; to send items to your platform’s recycle bin rather than deleting them forever. As with our other commands, this works across all the platforms that Nu supports.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; rm myfile.txt --trash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;parameter-descriptions-jonathandturner&quot;&gt;Parameter descriptions (jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;We’re also continuing to improve the built-in help system. New in this release are descriptions for the flags and parameters that the command uses.  For example, here’s a look at what the help for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rm&lt;/code&gt; now looks like:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; help rm
+Remove a file
+
+Usage:
+  &amp;gt; rm &amp;lt;path&amp;gt; {flags} 
+
+parameters:
+  &amp;lt;path&amp;gt; the file path to remove
+
+flags:
+  --trash: use the platform's recycle bin instead of permanently deleting
+  --recursive: delete subdirectories recursively
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;new-commands&quot;&gt;New commands&lt;/h1&gt;
+
+&lt;p&gt;In addition to the new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;append&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;prepend&lt;/code&gt; we mentioned earlier, we’ve added a few new commands to Nu.&lt;/p&gt;
+
+&lt;h2 id=&quot;average-notryanb&quot;&gt;Average (notryanb)&lt;/h2&gt;
+
+&lt;p&gt;Growing our set of mathematics functions for working with numbers, we now have an &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;average&lt;/code&gt; command which will take the average of values given to it.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ls | get size | average
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;read-jonathandturner&quot;&gt;Read (jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;We’ve also introduced a new command to load in strings as tables.  This new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;read&lt;/code&gt; command will take a pattern that describes the columns, their names, and where they are in each row of the string.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open .editorconfig
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = false
+end_of_line = lf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open .editorconfig | read &quot;{variable} = {value}&quot;
+━━━┯━━━━━━━━━━━━━━━━━━━━━━━━━━┯━━━━━━━
+ # │ variable                 │ value 
+───┼──────────────────────────┼───────
+ 0 │ root                     │ true 
+ 1 │ indent_style             │ space 
+ 2 │ indent_size              │ 4 
+ 3 │ charset                  │ utf-8 
+ 4 │ trim_trailing_whitespace │ true 
+ 5 │ insert_final_newline     │ false 
+ 6 │ end_of_line              │ lf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;bugfixes-jonathandturner-jesterornot-thegedge-andrasio-wycats-notryanb-detegr-t-hart&quot;&gt;Bugfixes (jonathandturner, JesterOrNot, thegedge, andrasio, wycats, notryanb, Detegr, t-hart)&lt;/h1&gt;
+
+&lt;p&gt;As always, we’ve had lots of bugfixes. A &lt;em&gt;huge&lt;/em&gt; “thank you!” to folks who reported issues, fixed issues, and just generally shared their experience with the shell. It’s much appreciated and helps to continue making Nu that much better.&lt;/p&gt;
+
+&lt;h1 id=&quot;survey&quot;&gt;Survey&lt;/h1&gt;
+
+&lt;p&gt;If you haven’t already taken it, we’d love to hear your feedback in a quick (roughly 3 question) &lt;a href=&quot;https://t.co/nujSjnI0dr?amp=1&quot;&gt;survey&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&quot;looking-forward&quot;&gt;Looking forward&lt;/h1&gt;
+
+&lt;p&gt;There are a bunch of areas we’re currently working on to make Nu more stable and feature complete. Until this work is finished, please consider Nu to be somewhere in the &lt;em&gt;pre-alpha&lt;/em&gt; to &lt;em&gt;alpha&lt;/em&gt; quality level.&lt;/p&gt;
+
+&lt;p&gt;That said, we’re excited to merge this work and continue to take steps towards a more full-featured shell. Soon to be coming will be Nu working on stable Rust(!!), some improvements in the Nu internal engine which will make it possible to have better streaming and cleaner commands, and features like aliases.&lt;/p&gt;</content><author><name>Jonathan Turner</name></author><summary type="html">Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.</summary></entry><entry><title type="html">Nushell 0.4.0</title><link href="http://localhost:4000/2019/10/15/nushell-0_4_0.html" rel="alternate" type="text/html" title="Nushell 0.4.0" /><published>2019-10-15T00:00:00+02:00</published><updated>2019-10-15T00:00:00+02:00</updated><id>http://localhost:4000/2019/10/15/nushell-0_4_0</id><content type="html" xml:base="http://localhost:4000/2019/10/15/nushell-0_4_0.html">&lt;p&gt;Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.&lt;/p&gt;
+
+&lt;p&gt;Today we’re happy to announce the 0.4.0 release of Nushell.  The &lt;a href=&quot;https://github.com/nushell/nushell/releases/tag/0.4.0&quot;&gt;0.4.0 release&lt;/a&gt; marks a continually maturing shell that is now starting to show signs of stability.  And, of course, a few fun features along the way.&lt;/p&gt;
+
+&lt;h1 id=&quot;where-to-get-it&quot;&gt;Where to get it&lt;/h1&gt;
+
+&lt;p&gt;Nu 0.4.0 is available as &lt;a href=&quot;https://github.com/nushell/nushell/releases/tag/0.4.0&quot;&gt;pre-built binaries&lt;/a&gt; or from &lt;a href=&quot;https://crates.io/crates/nu&quot;&gt;crates.io&lt;/a&gt;. If you have Rust installed you can install it using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +beta install nu&lt;/code&gt; (or if you want all the features &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +beta install nu --all-features&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h1 id=&quot;whats-new&quot;&gt;What’s new&lt;/h1&gt;
+
+&lt;h2 id=&quot;new-colors-wycats&quot;&gt;New Colors (wycats)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/0_4_0_new_colors.png&quot; alt=&quot;Example of nushell&quot; /&gt;&lt;br /&gt;
+New colors!&lt;/p&gt;
+
+&lt;p&gt;With 0.4.0, we’re adding some new colors to show off different types of the command, where errors might be happening, and if the command is internal or external. The coloring is just the tip of the iceberg, as it were, and builds from a reworking of the parser to make it more accurate, more stable, and more feature-complete.&lt;/p&gt;
+
+&lt;h2 id=&quot;streaming-table-jonathandturner&quot;&gt;Streaming table (jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/0_4_0_streaming_table.gif&quot; alt=&quot;Animation of a long table streaming out&quot; /&gt;
+Streaming tables&lt;/p&gt;
+
+&lt;p&gt;Up to this point, we’ve taken a few shortcuts with how streams worked in Nushell.  We knew that a table, in theory, was a stream of rows. In practice, though, this wasn’t the case as the code has lots of assumptions about how tables worked.&lt;/p&gt;
+
+&lt;p&gt;With the 0.4.0, we’re taking a big step in the direction of full support for streams.  You’ll see that now data will start being printed as it becomes available, with tables printing pages of 50 rows at a time (by default).  This allows you to get deep listings of files (eg using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls **&lt;/code&gt;), work with streams from external sources, and more.&lt;/p&gt;
+
+&lt;h2 id=&quot;better-ctrl-c-support-jonathandturner-landaire&quot;&gt;Better ctrl-c support (jonathandturner, landaire)&lt;/h2&gt;
+
+&lt;p&gt;As part of having streams of tables, it’s always helpful to be able to say “stop!” when you need to. With 0.4.0, using ctrl-c to stop the output should be a lot more responsive and will take you back to the prompt.&lt;/p&gt;
+
+&lt;h2 id=&quot;textview-gets-vi-keys-jonnywalker81&quot;&gt;Textview gets VI keys (JonnyWalker81)&lt;/h2&gt;
+
+&lt;p&gt;The built-in text viewer now lets you use vi keys for navigation thanks to JonnyWalker81’s work.&lt;/p&gt;
+
+&lt;h2 id=&quot;onto-the-beta-compiler-est31&quot;&gt;Onto the Beta compiler (est31)&lt;/h2&gt;
+
+&lt;p&gt;For those of you wondering if and when Nu was going to be usable on stable Rust, you need but wait just a little longer. Contributer est31 has been hard at work at moving Nu onto stable Rust and has now successfully moved Nu off of nightly and onto beta. As beta matures and becomes the next release of Rust, we’ll be able to move Nu onto stable. This should help people who are working to distribute Nu on various distributions.&lt;/p&gt;
+
+&lt;h2 id=&quot;brazilian-portuguese-book-marcelocg&quot;&gt;Brazilian Portuguese book (marcelocg)&lt;/h2&gt;
+
+&lt;p&gt;Contributor marcelocg surprised us with a translation of the Nu book into Brazillian Portuguese. Obrigado, Marcelo!&lt;/p&gt;
+
+&lt;h2 id=&quot;new-commands&quot;&gt;New commands&lt;/h2&gt;
+
+&lt;h3 id=&quot;from-ssv-t-hart&quot;&gt;from-ssv (t-hart)&lt;/h3&gt;
+
+&lt;p&gt;To follow along with our &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from-csv&lt;/code&gt; (comma-separated-values) and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from-tsv&lt;/code&gt; (tab-separated-values), we now have a new way of handle importing content from commands that output their own tables: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;from-ssv&lt;/code&gt;.  Like its siblings, it looks for values separated by a separator, using the spaces to show where the breaks between cells should be.&lt;/p&gt;
+
+&lt;h3 id=&quot;match-rnxpyke&quot;&gt;match (rnxpyke)&lt;/h3&gt;
+
+&lt;p&gt;We’re continuing to evolve our support for matching string data. Recently, we began experimenting with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;match&lt;/code&gt; command that can find matches in strings for you. We plan to continue experimenting and exploring what’s possible in this space in the future.&lt;/p&gt;
+
+&lt;h2 id=&quot;lots-of-new-documentation-sdfnz-twe4ked-chhetripradeep-mfarberbrodsky-cristicismas-charles-schleich-coolshaurya-notryanb-pema99-gilesv-yahsinhuangtw-jesterornot-nalshihabi-marcelocg-sorrell-pizzafox-iggy14750-drsensor-mlbright-bradybromley-andrasio-piotrek-szczygiel&quot;&gt;Lots of new documentation (sdfnz, twe4ked, chhetripradeep, mfarberbrodsky, cristicismas, Charles-Schleich, coolshaurya, notryanb, pema99, gilesv, yahsinhuangtw, JesterOrNot, nalshihabi, marcelocg, sorrell, pizzafox, iggy14750, DrSensor, mlbright, BradyBromley, andrasio, piotrek-szczygiel)&lt;/h2&gt;
+
+&lt;p&gt;Happy hacktoberfest!  Lots of people wanted to jump in and help document all of our commands, help fix docs that are already there, and generally give things a bit of polish. Much appreciated everyone who came by and contributed.&lt;/p&gt;
+
+&lt;h2 id=&quot;tons-of-stability-fixes-thegedge-jonathandturner-wycats-jonnywalker81-vsoch-pka&quot;&gt;Tons of stability fixes (thegedge, jonathandturner, wycats, JonnyWalker81, vsoch, pka)&lt;/h2&gt;
+
+&lt;p&gt;As always, there were a bunch of stability and correctness both in Nu and in the CI that support Nu’s development&lt;/p&gt;
+
+&lt;h1 id=&quot;looking-ahead&quot;&gt;Looking ahead&lt;/h1&gt;
+
+&lt;p&gt;We’ll continuing filling out the features that will let folks use Nu as their everyday shell. Coming up are better support for the environment, path, and for command aliases.&lt;/p&gt;</content><author><name>Jonathan Turner</name></author><summary type="html">Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.</summary></entry><entry><title type="html">Nushell 0.3.0</title><link href="http://localhost:4000/2019/09/24/nushell_0_3_0.html" rel="alternate" type="text/html" title="Nushell 0.3.0" /><published>2019-09-24T00:00:00+02:00</published><updated>2019-09-24T00:00:00+02:00</updated><id>http://localhost:4000/2019/09/24/nushell_0_3_0</id><content type="html" xml:base="http://localhost:4000/2019/09/24/nushell_0_3_0.html">&lt;p&gt;Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.&lt;/p&gt;
+
+&lt;p&gt;We’re happy to announce that today we’re releasing Nushell 0.3.0. Nu has seen numerous bugfixes, performance improvements, and features added since its initial public release (which was only a few weeks ago!)&lt;/p&gt;
+
+&lt;h1 id=&quot;where-to-get-it&quot;&gt;Where to get it&lt;/h1&gt;
+
+&lt;p&gt;Nu 0.3.0 is available as &lt;a href=&quot;https://github.com/nushell/nushell/releases/tag/0.3.0&quot;&gt;pre-built binaries&lt;/a&gt; or from &lt;a href=&quot;https://crates.io/crates/nu&quot;&gt;crates.io&lt;/a&gt;. If you have Rust installed you can install it using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +nightly install nu&lt;/code&gt; (or if you want all the features &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cargo +nightly install nu --all-features&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h1 id=&quot;whats-new&quot;&gt;What’s new&lt;/h1&gt;
+
+&lt;h2 id=&quot;new-table-design-porges-jonathandturner&quot;&gt;New table design (Porges, jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/utf8_table.png&quot; alt=&quot;Table with utf8 box drawing&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One of the most striking differences is that Nu now uses UTF-8 box drawing to draw its tables.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/utf8_light_table.png&quot; alt=&quot;Table with utf8 box drawing in light mode&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The table is also configurable. If you feel like the table is a bit too heavy, you can also configure it to work in light mode using this command:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; config --set [table_mode light]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;new-file-formats-pmeredit-est31-andrasio-jonathandturner&quot;&gt;New file formats (pmeredit, est31, andrasio, jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;Nu now natively supports new file formats, including: bson, tsv, sqlite, and url-encoded strings.&lt;/p&gt;
+
+&lt;h2 id=&quot;new-commands-incrop-ramonsnir-ijt-jonathandturner-andrasio-jonnywalker81-chhetripradeep-pka&quot;&gt;New commands (incrop, ramonsnir, ijt, jonathandturner, andrasio, JonnyWalker81, chhetripradeep, pka)&lt;/h2&gt;
+
+&lt;p&gt;Since the 0.2.0 release, Nu has gained a set of additional commands, including:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;help&lt;/code&gt; - built-in help system&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;reverse&lt;/code&gt; - reverse a table&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;last&lt;/code&gt; - like the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;first&lt;/code&gt; command, but working from the bottom of the table, return n rows&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;embed&lt;/code&gt; - create a new table using the current table as a start&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;fetch&lt;/code&gt; - get the contents of a URL (this originally lived in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;open&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;post&lt;/code&gt; - post to a URL and get the results&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pwd&lt;/code&gt; - print the working directory&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;env&lt;/code&gt; - give access to a number of important paths and environment settings&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;pivot&lt;/code&gt; - pivot a table so that rows become columns and vice-versa&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo&lt;/code&gt; - a built-in echo command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;error-improvements-jonathandturner&quot;&gt;Error improvements (jonathandturner)&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/did_you_mean.png&quot; alt=&quot;Improve error messages&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve made steady progress on improving error messages. Recently, we added “did you mean?” errors to help when you mistype the name of columns. Nu 0.3.0 also has gone through a few passes to generally polish the errors to include more information when an error occurs.&lt;/p&gt;
+
+&lt;h2 id=&quot;shell-features-pka-wycats-twe4ked-andrasio-iamcodemaker&quot;&gt;Shell features (pka, wycats, twe4ked, andrasio, iamcodemaker)&lt;/h2&gt;
+
+&lt;p&gt;Nu now supports &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~&lt;/code&gt; to refer to your home directory as part of a path.  You can also use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd -&lt;/code&gt; to return to a previous directory you were working in.&lt;/p&gt;
+
+&lt;p&gt;The shell itself also got a few updates. You can now enable ‘vi’ mode, if you’d prefer vi-like bindings (by running &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;config --set [edit_mode vi]&lt;/code&gt;). On non-Windows platforms, you can also use Ctrl-R to enable Sublime-style history searching (we’re hoping to enable Windows support for this soon).&lt;/p&gt;
+
+&lt;h2 id=&quot;plugin-improvements-jonathandturner-andrasio&quot;&gt;Plugin improvements (jonathandturner, andrasio)&lt;/h2&gt;
+
+&lt;p&gt;Plugins have continued to mature, and it’s now possible to use plugins to extend Nu with support for new file formats.&lt;/p&gt;
+
+&lt;p&gt;We’ve also added documentation on how to &lt;a href=&quot;https://github.com/nushell/contributor-book/blob/master/en/plugins.md&quot;&gt;write Nu plugins in both Rust and Python&lt;/a&gt;, with info on Ruby coming soon.&lt;/p&gt;
+
+&lt;h2 id=&quot;docker-support-vsoch-drsensor&quot;&gt;Docker support (vsoch, DrSensor)&lt;/h2&gt;
+
+&lt;p&gt;If you’re interested in using Nu and Docker together, be sure to check out the &lt;a href=&quot;https://github.com/nushell/nushell/blob/master/docs/docker.md&quot;&gt;new Docker support&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;book-progress&quot;&gt;Book progress&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;http://book.nushell.sh&quot;&gt;Nu book&lt;/a&gt; is now available in &lt;em&gt;three&lt;/em&gt; languages: English, Spanish, and Japanese.&lt;/p&gt;
+
+&lt;p&gt;We’ve also created a &lt;a href=&quot;https://github.com/nushell/contributor-book/blob/master/en/README.md&quot;&gt;Nu contributor book&lt;/a&gt;, which will help developers who want to contribute to Nu learn about its philosophy, design, and how to create plugins.&lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+
+&lt;p&gt;est31, pmeredit, twe4ked, DrSensor, vsoch, pka, jankoprowski, Porges, max-sixty, ijt, djc, vthriller, taiki-e, oskarskog, iamcodemaker, JonnyWalker81, yaahc, tim77, svartalf, ramonsnir, orf, lesichkovm, ineol, incrop, eoinkelly, devnought, chhetripradeep, aidanharris, GuillaumeGomez, and BatmanAod for contributing to the Nu codebase. Also a &lt;em&gt;big&lt;/em&gt; thanks to our issue reporters!&lt;/p&gt;
+
+&lt;p&gt;ymgyt - for the Japanese version of the Nu book!&lt;/p&gt;
+
+&lt;p&gt;mistydemeo, romanlevin, ralvessa, pka, lord, kkalyan, jankprowski, and boisgera for helping with the book.&lt;/p&gt;
+
+&lt;h2 id=&quot;looking-ahead&quot;&gt;Looking ahead&lt;/h2&gt;
+
+&lt;p&gt;We’re hard at work on the &lt;a href=&quot;https://github.com/nushell/nushell/issues/261&quot;&gt;upcoming milestone release&lt;/a&gt;. If you’d like to help, feel free to jump in! We have an active &lt;a href=&quot;https://discord.gg/NtAbbGn&quot;&gt;discord&lt;/a&gt; you can join for both users and contributors.&lt;/p&gt;</content><author><name>Jonathan Turner</name></author><summary type="html">Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.</summary></entry><entry><title type="html">Introducing nushell</title><link href="http://localhost:4000/2019/08/23/introducing-nushell.html" rel="alternate" type="text/html" title="Introducing nushell" /><published>2019-08-23T00:00:00+02:00</published><updated>2019-08-23T00:00:00+02:00</updated><id>http://localhost:4000/2019/08/23/introducing-nushell</id><content type="html" xml:base="http://localhost:4000/2019/08/23/introducing-nushell.html">&lt;p&gt;Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.&lt;/p&gt;
+
+&lt;p&gt;It’s called Nushell, or just Nu for short.  We have a &lt;a href=&quot;https://book.nushell.sh/en&quot;&gt;book&lt;/a&gt; (¡también se habla &lt;a href=&quot;https://book.nushell.sh/es&quot;&gt;Español&lt;/a&gt;!). We have a &lt;a href=&quot;https://github.com/nushell/nushell&quot;&gt;repo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino, with contributions from Odin Dutton.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nushell-autocomplete4.gif&quot; alt=&quot;Nu in action&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;but-why&quot;&gt;But why?&lt;/h1&gt;
+
+&lt;p&gt;Many of us have gotten used to bash (or zsh/fish/etc), and don’t understand why you would need another kind of shell. That was me, too, a few months ago before I started working on this. My friend Yehuda had discovered PowerShell and was going on and on about how amazing it was to do more with the shell, but until he actually gave me a demo, I didn’t really believe him.&lt;/p&gt;
+
+&lt;p&gt;Then he talked me into joining him on an idea he had. What if we could take the ideas of a structured shell and make it more functional (as opposed to object-oriented)? What if, like PowerShell, it worked on Windows, Linux, and macOS? What if it had great error messages? I fell in love with the project ideas, made a few new friends, and many nights and weekends later I’d like to show you what we’ve made.&lt;/p&gt;
+
+&lt;p&gt;In this post, I’ll talk about how a few simple ideas drive how Nu works, what Nu can do with them, and where we hope to go in the future.&lt;/p&gt;
+
+&lt;h1 id=&quot;simple-ideas&quot;&gt;Simple ideas&lt;/h1&gt;
+
+&lt;p&gt;To Nu, everything is data.  When you type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, you’re given a table of information about the directory you’re listing:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nu_ls.png&quot; alt=&quot;ls command&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Rather than having to remember different flags to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, we can just work with the data it gives back. We can find the files greater than a certain size:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nu_ls_filter.png&quot; alt=&quot;ls with filtering&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Or we could choose to sort it by a column, or only show directories, or more. That by itself is fun but perhaps not compelling enough.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nu_ps_filter.png&quot; alt=&quot;ps with filtering&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we’re using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from.  Nu pushes this idea even further.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/open_cargo.png&quot; alt=&quot;opening toml file&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Nu also understands structured text files like JSON, TOML, YAML, and more. Opening these files gives us the same tables we saw with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt;. Again, this lets us use the same commands to filter our data, explore it, and use it.&lt;/p&gt;
+
+&lt;h1 id=&quot;working-with-the-outside-world&quot;&gt;Working with the outside world&lt;/h1&gt;
+
+&lt;p&gt;The above approach could be fun, but if we’re not careful, it could become a walled garden. What happens outside of the commands Nu comes with?&lt;/p&gt;
+
+&lt;p&gt;First, let’s take a look at working with a file that Nu doesn’t understand.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open people.psv
+Octavia | Butler | Writer
+Bob | Ross | Painter
+Antonio | Vivaldi | Composer
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;To work with this in Nu, we need to do two steps: figure out where the rows are, and then figure out what the columns are. The rows are pretty easy, we just have one record per row:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open people.psv | lines
+---+------------------------------
+ # | value 
+---+------------------------------
+ 0 | Octavia | Butler | Writer 
+ 1 | Bob | Ross | Painter 
+ 2 | Antonio | Vivaldi | Composer 
+---+------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, we can create our columns by splitting each row at the pipe (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt;) symbol:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open people.psv | lines | split-column &quot;|&quot;
+---+----------+-----------+-----------
+ # | Column1  | Column2   | Column3 
+---+----------+-----------+-----------
+ 0 | Octavia  |  Butler   |  Writer 
+ 1 | Bob      |  Ross     |  Painter 
+ 2 | Antonio  |  Vivaldi  |  Composer 
+---+----------+-----------+-----------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s already good enough that we can work with the data. We can go a step further and name the columns if we want:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open people.psv | lines | split-column &quot; | &quot; firstname lastname job
+---+-----------+----------+----------
+ # | firstname | lastname | job 
+---+-----------+----------+----------
+ 0 | Octavia   | Butler   | Writer 
+ 1 | Bob       | Ross     | Painter 
+ 2 | Antonio   | Vivaldi  | Composer 
+---+-----------+----------+----------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;But what about working with commands outside of Nu? Let’s first call the native version of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; instead of the Nu version:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ^ls
+assets	     Cargo.lock  docs	images	 Makefile.toml	README.md     rustfmt2.toml  src     tests
+Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   target
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll use the same commands we used on data to bring it into Nu:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;^ls | split-row &quot; &quot; file
+----+---------------
+ #  | value 
+----+---------------
+ 0  | assets 
+ 1  | Cargo2.toml 
+ 2  | Cargo.lock 
+ 3  | Cargo.toml 
+ 4  | docs 
+ 5  | extra 
+ 6  | images 
+ 7  | LICENSE 
+ 8  | Makefile.toml 
+ 9  | open 
+ 10 | README.md 
+ 11 | readonly.txt 
+ 12 | rustfmt2.toml 
+ 13 | rustfmt.toml 
+ 14 | src 
+ 15 | target 
+ 16 | tests 
+----+---------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Or maybe we want to work with the native &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls -la&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;^ls -la | lines | split-column &quot; &quot;
+----+------------+---------+----------+----------+---------+---------+---------+---------+---------------
+ #  | Column1    | Column2 | Column3  | Column4  | Column5 | Column6 | Column7 | Column8 | Column9 
+----+------------+---------+----------+----------+---------+---------+---------+---------+---------------
+ 0  | total      | 296     |          |          |         |         |         |         |  
+ 1  | drwxr-xr-x | 13      | jonathan | jonathan | 4096    | Aug     | 24      | 03:24   | . 
+ 2  | drwxr-xr-x | 21      | jonathan | jonathan | 4096    | Aug     | 22      | 17:00   | .. 
+ 3  | drwxr-xr-x | 2       | jonathan | jonathan | 4096    | Aug     | 3       | 05:39   | assets 
+ 4  | drwxr-xr-x | 2       | jonathan | jonathan | 4096    | Aug     | 21      | 19:29   | .azure 
+ 5  | drwxr-xr-x | 2       | jonathan | jonathan | 4096    | Jun     | 23      | 05:09   | .cargo 
+ 6  | -rw-r--r-- | 1       | jonathan | jonathan | 2963    | Aug     | 22      | 20:17   | Cargo2.toml 
+ 7  | -rw-r--r-- | 1       | jonathan | jonathan | 201255  | Aug     | 24      | 03:24   | Cargo.lock 
+ 8  | -rw-r--r-- | 1       | jonathan | jonathan | 3127    | Aug     | 24      | 03:24   | Cargo.toml 
+ 9  | drwxr-xr-x | 2       | jonathan | jonathan | 4096    | Jun     | 17      | 15:32   | docs 
+ 10 | -rw-r--r-- | 1       | jonathan | jonathan | 148     | Jun     | 17      | 15:32   | .editorconfig 
+ 11 | drwxr-xr-x | 4       | jonathan | jonathan | 4096    | Aug     | 22      | 19:29   | extra 
+ 12 | drwxr-xr-x | 8       | jonathan | jonathan | 4096    | Aug     | 24      | 03:24   | .git 
+ 13 | -rw-r--r-- | 1       | jonathan | jonathan | 58      | Aug     | 10      | 11:08   | .gitignore 
+ 14 | drwxr-xr-x | 2       | jonathan | jonathan | 4096    | Aug     | 24      | 03:24   | images 
+ 15 | -rw-r--r-- | 1       | jonathan | jonathan | 1085    | Jun     | 17      | 15:32   | LICENSE 
+ 16 | -rw-r--r-- | 1       | jonathan | jonathan | 614     | Jun     | 17      | 15:32   | Makefile.toml 
+ 17 | -rw-r--r-- | 1       | jonathan | jonathan | 0       | Aug     | 23      | 04:58   | open 
+ 18 | -rw-r--r-- | 1       | jonathan | jonathan | 11375   | Aug     | 24      | 03:24   | README.md 
+ 19 | -r--r--r-- | 1       | jonathan | jonathan | 0       | Jul     | 4       | 03:51   | readonly.txt 
+ 20 | -rw-r--r-- | 1       | jonathan | jonathan | 37      | Aug     | 23      | 04:54   | rustfmt2.toml 
+ 21 | -rw-r--r-- | 1       | jonathan | jonathan | 16      | Aug     | 1       | 19:45   | rustfmt.toml 
+ 22 | drwxr-xr-x | 10      | jonathan | jonathan | 4096    | Aug     | 24      | 03:24   | src 
+ 23 | drwxr-xr-x | 4       | jonathan | jonathan | 4096    | Aug     | 22      | 19:22   | target 
+ 24 | drwxr-xr-x | 4       | jonathan | jonathan | 4096    | Aug     | 22      | 04:15   | tests 
+ 25 | drwxrwxr-x | 2       | jonathan | jonathan | 4096    | Jul     | 19      | 15:18   | .vscode 
+----+------------+---------+----------+----------+---------+---------+---------+---------+---------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;After a bit of experimenting, we might come up with a command like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ^ls -la | lines | skip 1 | split-column &quot; &quot; perms files group user size month day time name
+----+------------+-------+----------+----------+--------+-------+-----+-------+---------------
+ #  | perms      | files | group    | user     | size   | month | day | time  | name 
+----+------------+-------+----------+----------+--------+-------+-----+-------+---------------
+ 0  | drwxr-xr-x | 13    | jonathan | jonathan | 4096   | Aug   | 24  | 03:24 | . 
+ 1  | drwxr-xr-x | 21    | jonathan | jonathan | 4096   | Aug   | 22  | 17:00 | .. 
+ 2  | drwxr-xr-x | 2     | jonathan | jonathan | 4096   | Aug   | 3   | 05:39 | assets 
+ 3  | drwxr-xr-x | 2     | jonathan | jonathan | 4096   | Aug   | 21  | 19:29 | .azure 
+ 4  | drwxr-xr-x | 2     | jonathan | jonathan | 4096   | Jun   | 23  | 05:09 | .cargo 
+ 5  | -rw-r--r-- | 1     | jonathan | jonathan | 2963   | Aug   | 22  | 20:17 | Cargo2.toml 
+ 6  | -rw-r--r-- | 1     | jonathan | jonathan | 201255 | Aug   | 24  | 03:24 | Cargo.lock 
+ 7  | -rw-r--r-- | 1     | jonathan | jonathan | 3127   | Aug   | 24  | 03:24 | Cargo.toml 
+ 8  | drwxr-xr-x | 2     | jonathan | jonathan | 4096   | Jun   | 17  | 15:32 | docs 
+ 9  | -rw-r--r-- | 1     | jonathan | jonathan | 148    | Jun   | 17  | 15:32 | .editorconfig 
+ 10 | drwxr-xr-x | 4     | jonathan | jonathan | 4096   | Aug   | 22  | 19:29 | extra 
+ 11 | drwxr-xr-x | 8     | jonathan | jonathan | 4096   | Aug   | 24  | 03:24 | .git 
+ 12 | -rw-r--r-- | 1     | jonathan | jonathan | 58     | Aug   | 10  | 11:08 | .gitignore 
+ 13 | drwxr-xr-x | 2     | jonathan | jonathan | 4096   | Aug   | 24  | 03:24 | images 
+ 14 | -rw-r--r-- | 1     | jonathan | jonathan | 1085   | Jun   | 17  | 15:32 | LICENSE 
+ 15 | -rw-r--r-- | 1     | jonathan | jonathan | 614    | Jun   | 17  | 15:32 | Makefile.toml 
+ 16 | -rw-r--r-- | 1     | jonathan | jonathan | 0      | Aug   | 23  | 04:58 | open 
+ 17 | -rw-r--r-- | 1     | jonathan | jonathan | 11375  | Aug   | 24  | 03:24 | README.md 
+ 18 | -r--r--r-- | 1     | jonathan | jonathan | 0      | Jul   | 4   | 03:51 | readonly.txt 
+ 19 | -rw-r--r-- | 1     | jonathan | jonathan | 37     | Aug   | 23  | 04:54 | rustfmt2.toml 
+ 20 | -rw-r--r-- | 1     | jonathan | jonathan | 16     | Aug   | 1   | 19:45 | rustfmt.toml 
+ 21 | drwxr-xr-x | 10    | jonathan | jonathan | 4096   | Aug   | 24  | 03:24 | src 
+ 22 | drwxr-xr-x | 4     | jonathan | jonathan | 4096   | Aug   | 22  | 19:22 | target 
+ 23 | drwxr-xr-x | 4     | jonathan | jonathan | 4096   | Aug   | 22  | 04:15 | tests 
+ 24 | drwxrwxr-x | 2     | jonathan | jonathan | 4096   | Jul   | 19  | 15:18 | .vscode 
+----+------------+-------+----------+----------+--------+-------+-----+-------+---------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Because Nu let’s you manipulate your data until it’s how you want it, there’s a feeling of playing with your data. You get used to using the verbs, and then you can use them on anything. When you’re ready, you can write it back to disk.&lt;/p&gt;
+
+&lt;p&gt;Oh, before I forget - I wanted to quickly show how to get data from Nu back out into the outside world. Here’s an example of calling &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;echo&lt;/code&gt; on each filename in a directory:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ls | get name | echo $it
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can see that we can mix-and-match commands that are inside of Nu with those that are outside, and data will still flow between them as expected. But Nu is more than just a pipeline.&lt;/p&gt;
+
+&lt;h1 id=&quot;more-than-a-pipeline&quot;&gt;More than a pipeline&lt;/h1&gt;
+
+&lt;p&gt;As we built Nu, we realized we could experiment with other parts of how a shell works. The first of these experiments lead us to an observation: if everything is data in Nu, we should be able to view this data.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/view_source.png&quot; alt=&quot;viewing source file&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve seen the tables. Nu also supports opening and looking at text and binary data. If we open a source file, we can scroll around in a syntax-highlighted file. If we open an xml, we can look at its data. We can even open a binary file and look at what’s inside (hint: there’s even a fun easter egg if you open certain kinds binary files, especially if you’ve installed Nu with the optional &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rawkey&lt;/code&gt; feature).&lt;/p&gt;
+
+&lt;p&gt;Being able to view data is helpful, and this kind of polish extends to other aspects, like error messages:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nu_error2.png&quot; alt=&quot;simple error&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Nu takes heavy inspiration from the &lt;a href=&quot;https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html&quot;&gt;error messages in Rust&lt;/a&gt;. As much as possible, draw your eyes to the problem.&lt;/p&gt;
+
+&lt;p&gt;Combined with the pipeline, some pretty interesting errors are possible:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/nu_error_metadata.png&quot; alt=&quot;error with metadata&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You might wonder how does that even work. Nu has a metadata system (still early!) that you can read about in the &lt;a href=&quot;https://book.nushell.sh/en/metadata&quot;&gt;Metadata chapter&lt;/a&gt; of the &lt;a href=&quot;https://book.nushell.sh&quot;&gt;Nu book&lt;/a&gt;. Let’s just take a quick peek at it:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; open Cargo.toml
+------------+--------------+------------------+----------+----------
+ bin        | dependencies | dev-dependencies | lib      | package 
+------------+--------------+------------------+----------+----------
+ [11 items] | [object]     | [object]         | [object] | [object] 
+------------+--------------+------------------+----------+----------
+&amp;gt; open Cargo.toml | tags
+----------+------------------------------------------
+ span     | origin 
+----------+------------------------------------------
+ [object] | /home/jonathan/Source/nushell/Cargo.toml 
+----------+------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Data that flows through the pipeline gets a set of additional metadata tagged to it. We can use this later to figure out how to display the contents, show a better error message, and more.&lt;/p&gt;
+
+&lt;h1 id=&quot;shells-plural&quot;&gt;Shells, plural&lt;/h1&gt;
+
+&lt;p&gt;Let’s say you’re in a directory, but you’d really like to flip back and forth between it and one or two others. You could open up multiple tabs, multiple terminals, if you’re on a Unix system you could use “screen”, and probably even more than that. What if the shells were just built in?&lt;/p&gt;
+
+&lt;p&gt;In Nu, we can &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;enter&lt;/code&gt; a directory, which adds it to a ring of shells we can bounce between:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; enter ../rhai/
+/home/jonathan/Source/rhai(master)&amp;gt; shells
+---+---+------------+-------------------------------
+ # |   | name       | path 
+---+---+------------+-------------------------------
+ 0 |   | filesystem | /home/jonathan/Source/nushell 
+ 1 | X | filesystem | /home/jonathan/Source/rhai 
+---+---+------------+-------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Using &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;n&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;p&lt;/code&gt; we can jump back and forth between the shells. &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;exit&lt;/code&gt; gets us out of a shell.&lt;/p&gt;
+
+&lt;p&gt;You might noticed that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;name&lt;/code&gt; column in the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;shells&lt;/code&gt; table. Why’s that there?  Oh no… oh yes.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; enter Cargo.toml
+/&amp;gt; shells
+---+---+--------------------------------------------+-------------------------------
+ # |   | name                                       | path 
+---+---+--------------------------------------------+-------------------------------
+ 0 |   | filesystem                                 | /home/jonathan/Source/nushell 
+ 1 |   | filesystem                                 | /home/jonathan/Source/rhai 
+ 2 | X | {/home/jonathan/Source/nushell/Cargo.toml} | / 
+---+---+--------------------------------------------+-------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s right, we’re in the file.  Can we &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;cd&lt;/code&gt;? Oh yes, we can:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/&amp;gt; ls
+------------+--------------+------------------+----------+----------
+ bin        | dependencies | dev-dependencies | lib      | package 
+------------+--------------+------------------+----------+----------
+ [11 items] | [object]     | [object]         | [object] | [object] 
+------------+--------------+------------------+----------+----------
+/&amp;gt; cd bin
+/bin&amp;gt; ls
+----+----------------------+---------------------------
+ #  | name                 | path 
+----+----------------------+---------------------------
+ 0  | nu_plugin_inc        | src/plugins/inc.rs 
+ 1  | nu_plugin_sum        | src/plugins/sum.rs 
+ 2  | nu_plugin_add        | src/plugins/add.rs 
+ 3  | nu_plugin_edit       | src/plugins/edit.rs 
+ 4  | nu_plugin_str        | src/plugins/str.rs 
+ 5  | nu_plugin_skip       | src/plugins/skip.rs 
+ 6  | nu_plugin_sys        | src/plugins/sys.rs 
+ 7  | nu_plugin_tree       | src/plugins/tree.rs 
+ 8  | nu_plugin_binaryview | src/plugins/binaryview.rs 
+ 9  | nu_plugin_textview   | src/plugins/textview.rs 
+ 10 | nu                   | src/main.rs 
+----+----------------------+---------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;plugins&quot;&gt;Plugins&lt;/h1&gt;
+
+&lt;p&gt;Nu can’t come with everything you might want to do with it, so we’re releasing Nu with the ability to extend it with plugins.  There’s more information in the &lt;a href=&quot;https://book.nushell.sh/en/plugins&quot;&gt;plugins chapters&lt;/a&gt;.  Nu will look for these plugins in your path, and load them up on startup.&lt;/p&gt;
+
+&lt;h1 id=&quot;all-because-of-rust&quot;&gt;All because of Rust&lt;/h1&gt;
+
+&lt;p&gt;Nu would not have been possible without Rust. Internally, it uses async/await, async streams, and liberal use of “serde” to manage serializing and deserializing into the common data format and to communicate with plugins.&lt;/p&gt;
+
+&lt;p&gt;We also heavily leveraged &lt;a href=&quot;https://crates.io&quot;&gt;crates.io&lt;/a&gt;. The ability to load numerous file formats, display messages, draw tables, and more all came from the hundreds (thousands?) of generous developers who wrote the crates we use in Nu. A &lt;strong&gt;huge&lt;/strong&gt; thank you to everyone who contributed to Nu without ever knowing it.&lt;/p&gt;
+
+&lt;h1 id=&quot;whats-next&quot;&gt;What’s next?&lt;/h1&gt;
+
+&lt;p&gt;Nu is just getting started. In this release, we have a foundation to build on. Next, we’ll work towards stability, the abilty to use Nu as your main shell, the ability to write functions and scripts in Nu, and much more.&lt;/p&gt;
+
+&lt;p&gt;If you want to give it a spin, the &lt;a href=&quot;https://book.nushell.sh/en/installation&quot;&gt;installation instructions&lt;/a&gt; will help you get started. If you want to chat come by our &lt;a href=&quot;https://discord.gg/NtAbbGn&quot;&gt;discord&lt;/a&gt; and &lt;a href=&quot;https://github.com/nushell/nushell&quot;&gt;github&lt;/a&gt;&lt;/p&gt;</content><author><name>Jonathan Turner</name></author><summary type="html">Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.</summary></entry></feed>

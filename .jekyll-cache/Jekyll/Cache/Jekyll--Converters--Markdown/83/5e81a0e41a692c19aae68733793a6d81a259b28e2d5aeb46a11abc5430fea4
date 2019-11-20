@@ -1,0 +1,64 @@
+I"D<p>Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.</p>
+
+<p>Today we’re happy to announce the 0.4.0 release of Nushell.  The <a href="https://github.com/nushell/nushell/releases/tag/0.4.0">0.4.0 release</a> marks a continually maturing shell that is now starting to show signs of stability.  And, of course, a few fun features along the way.</p>
+
+<h1 id="where-to-get-it">Where to get it</h1>
+
+<p>Nu 0.4.0 is available as <a href="https://github.com/nushell/nushell/releases/tag/0.4.0">pre-built binaries</a> or from <a href="https://crates.io/crates/nu">crates.io</a>. If you have Rust installed you can install it using <code class="highlighter-rouge">cargo +beta install nu</code> (or if you want all the features <code class="highlighter-rouge">cargo +beta install nu --all-features</code>).</p>
+
+<h1 id="whats-new">What’s new</h1>
+
+<h2 id="new-colors-wycats">New Colors (wycats)</h2>
+
+<p><img src="http://jonathanturner.org/images/0_4_0_new_colors.png" alt="The prompt with the latest colors" />
+New colors!</p>
+
+<p>With 0.4.0, we’re adding some new colors to show off different types of the command, where errors might be happening, and if the command is internal or external. The coloring is just the tip of the iceberg, as it were, and builds from a reworking of the parser to make it more accurate, more stable, and more feature-complete.</p>
+
+<h2 id="streaming-table-jonathandturner">Streaming table (jonathandturner)</h2>
+
+<p><img src="http://jonathanturner.org/images/0_4_0_streaming_table.gif" alt="Animation of a long table streaming out" />
+Streaming tables</p>
+
+<p>Up to this point, we’ve taken a few shortcuts with how streams worked in Nushell.  We knew that a table, in theory, was a stream of rows. In practice, though, this wasn’t the case as the code has lots of assumptions about how tables worked.</p>
+
+<p>With the 0.4.0, we’re taking a big step in the direction of full support for streams.  You’ll see that now data will start being printed as it becomes available, with tables printing pages of 50 rows at a time (by default).  This allows you to get deep listings of files (eg using <code class="highlighter-rouge">ls **</code>), work with streams from external sources, and more.</p>
+
+<h2 id="better-ctrl-c-support-jonathandturner-landaire">Better ctrl-c support (jonathandturner, landaire)</h2>
+
+<p>As part of having streams of tables, it’s always helpful to be able to say “stop!” when you need to. With 0.4.0, using ctrl-c to stop the output should be a lot more responsive and will take you back to the prompt.</p>
+
+<h2 id="textview-gets-vi-keys-jonnywalker81">Textview gets VI keys (JonnyWalker81)</h2>
+
+<p>The built-in text viewer now lets you use vi keys for navigation thanks to JonnyWalker81’s work.</p>
+
+<h2 id="onto-the-beta-compiler-est31">Onto the Beta compiler (est31)</h2>
+
+<p>For those of you wondering if and when Nu was going to be usable on stable Rust, you need but wait just a little longer. Contributer est31 has been hard at work at moving Nu onto stable Rust and has now successfully moved Nu off of nightly and onto beta. As beta matures and becomes the next release of Rust, we’ll be able to move Nu onto stable. This should help people who are working to distribute Nu on various distributions.</p>
+
+<h2 id="brazilian-portuguese-book-marcelocg">Brazilian Portuguese book (marcelocg)</h2>
+
+<p>Contributor marcelocg surprised us with a translation of the Nu book into Brazillian Portuguese. Obrigado, Marcelo!</p>
+
+<h2 id="new-commands">New commands</h2>
+
+<h3 id="from-ssv-t-hart">from-ssv (t-hart)</h3>
+
+<p>To follow along with our <code class="highlighter-rouge">from-csv</code> (comma-separated-values) and <code class="highlighter-rouge">from-tsv</code> (tab-separated-values), we now have a new way of handle importing content from commands that output their own tables: <code class="highlighter-rouge">from-ssv</code>.  Like its siblings, it looks for values separated by a separator, using the spaces to show where the breaks between cells should be.</p>
+
+<h3 id="match-rnxpyke">match (rnxpyke)</h3>
+
+<p>We’re continuing to evolve our support for matching string data. Recently, we began experimenting with a <code class="highlighter-rouge">match</code> command that can find matches in strings for you. We plan to continue experimenting and exploring what’s possible in this space in the future.</p>
+
+<h2 id="lots-of-new-documentation-sdfnz-twe4ked-chhetripradeep-mfarberbrodsky-cristicismas-charles-schleich-coolshaurya-notryanb-pema99-gilesv-yahsinhuangtw-jesterornot-nalshihabi-marcelocg-sorrell-pizzafox-iggy14750-drsensor-mlbright-bradybromley-andrasio-piotrek-szczygiel">Lots of new documentation (sdfnz, twe4ked, chhetripradeep, mfarberbrodsky, cristicismas, Charles-Schleich, coolshaurya, notryanb, pema99, gilesv, yahsinhuangtw, JesterOrNot, nalshihabi, marcelocg, sorrell, pizzafox, iggy14750, DrSensor, mlbright, BradyBromley, andrasio, piotrek-szczygiel)</h2>
+
+<p>Happy hacktoberfest!  Lots of people wanted to jump in and help document all of our commands, help fix docs that are already there, and generally give things a bit of polish. Much appreciated everyone who came by and contributed.</p>
+
+<h2 id="tons-of-stability-fixes-thegedge-jonathandturner-wycats-jonnywalker81-vsoch-pka">Tons of stability fixes (thegedge, jonathandturner, wycats, JonnyWalker81, vsoch, pka)</h2>
+
+<p>As always, there were a bunch of stability and correctness both in Nu and in the CI that support Nu’s development</p>
+
+<h1 id="looking-ahead">Looking ahead</h1>
+
+<p>We’ll continuing filling out the features that will let folks use Nu as their everyday shell. Coming up are better support for the environment, path, and for command aliases.</p>
+:ET
