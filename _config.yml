@@ -20,7 +20,7 @@
 
 title: Nu Blog
 description: Blog to the Nu project.
-url: "http://blog.nushell.sh" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.nushell.sh" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  nushell
 github_page: https://github.com/nushell
 default_image: /images/default.png
