@@ -223,10 +223,11 @@ h4, h5, h6 { color: #242424; }
 
 h3 { font-size: 18px; line-height: 24px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; color: #535353; }
 
-a { color: #4e9a06; font-weight: 400; text-decoration: none; }
+a { color: #418305; font-weight: 400; text-decoration: none; font-weight: bold; }
+a:hover { color: #60c007; }
 a.nu { font-size: 30px; word-spacing: normal; }
 a.back { font-size: 26px; }
-a:hover { color: #4ec526; }
+a.post { font-weight: normal; }
 
 a small { font-size: 11px; color: #555; margin-top: -0.6em; display: block; }
 
@@ -247,13 +248,14 @@ pre code { color: #efefef; background: #333; text-shadow: 0px 1px 0px #000; marg
 
 table { width: 100%; border-collapse: collapse; }
 
-#header { z-index: 100; left: 0; top: 0px; height: 60px; width: 100%; position: fixed; background: url(../images/nav-bg.gif) #353535; border-bottom: 4px solid #434343; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); }
-#header nav { max-width: 650px; margin: 2px auto; padding: 0 0px; background: none; margin: 12px auto; font-size: 22px; border: none; border-radius: 5px; text-align: left; border-bottom-width: 50px; flex-wrap: wrap; display: flow-root; }
-#header nav a { margin-right: 15px; }
-#header nav li { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; list-style: none; display: inline; color: white; line-height: 50px; text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2); font-size: 14px; }
-#header nav li a { color: #fff; border: 1px solid none; border-radius: 5px; background: #4e9a06; border-radius: 5px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7); word-spacing: 2px; background-color: #4e9a06; padding: 4px 6px; padding-top: 4px; padding-bottom: 4px; font-size: 15px; text-align: center; }
-#header nav li a:hover { background: #4ec526; background-color: #4ec526; border: 1px solid none; border-radius: 5px; box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0); }
-#header nav li.button { float: right; margin-left: 0px; size: 12px; border-radius: 5px; top: 5px; margin-top: -5px; }
+#header { z-index: 100; left: 0; height: min-content; top: 0px; width: 100%; position: fixed; background: url(../images/nav-bg.gif) #353535; border-bottom: 4px solid #434343; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25); padding-top: 2px; padding-bottom: 2px; }
+#header nav { max-width: 650px; margin: 2px auto; padding: 0 0px; background: none; margin: 12px auto; font-size: 22px; border: none; border-radius: 5px; text-align: left; flex-wrap: wrap; display: flow-root; margin-top: 15px; }
+#header nav a { margin-right: 15px; margin-top: 5px; color: #4ec526; font-weight: normal; }
+#header nav a:hover { color: #40ff00; }
+#header nav li { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; list-style: none; display: inline; color: white; line-height: 20px; text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2); font-size: 14px; margin-top: 10px; margin-bottom: 5px; }
+#header nav li a { color: #fff; border: 1px solid none; border-radius: 5px; background: #418305; border-radius: 5px; box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.3), 0px 3px 7px rgba(0, 0, 0, 0.7); word-spacing: 2px; background-color: #418305; padding: 4px 4px; padding-top: 4px; padding-bottom: 4px; font-size: 15px; text-align: center; }
+#header nav li a:hover { color: #fff; background: #4ec526; background-color: #4ec526; border: 1px solid none; border-radius: 5px; box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 0, 0, 0); }
+#header nav li.button { float: right; margin-left: 0px; size: 12px; border-radius: 5px; top: 5px; }
 #header nav li.downloads { float: right; margin-left: 6px; }
 #header nav li.title { float: right; margin-right: 10px; font-size: 11px; }
 
@@ -262,6 +264,7 @@ footer .credits { font-size: 11px; font-family: 'OpenSansRegular', "Helvetica Ne
 footer .credits.left { float: left; }
 footer .credits.right { float: right; }
 footer .author { background-position: center; object-position: center; background: #ededed; border-radius: 8px; width: 25%; padding-top: 10px; padding-bottom: 1px; mask-position: center; position: relative; object-position: center; margin-left: auto; margin-right: auto; margin-top: auto; }
+footer .author a { color: #387304; font-weight: normal; }
 footer .author img { border-radius: 8px; }
 
 section { max-width: 650px; padding: 30px 0px 50px 0px; margin: 20px 0; margin-top: 70px; }
