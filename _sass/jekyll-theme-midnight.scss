@@ -275,7 +275,9 @@ footer {
     object-position: center;
     background: #ededed;
     border-radius: 8px;
-    width: 25%;
+    width: min-content;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-top: 10px;
     padding-bottom: 1px;
     mask-position: center;
