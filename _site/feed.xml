@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-20T17:32:32+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Nu Blog</title><subtitle>Blog to the Nu project.</subtitle><entry><title type="html">Nushell 0.5.0</title><link href="http://localhost:4000/2019/11/05/nushell-0_5_0.html" rel="alternate" type="text/html" title="Nushell 0.5.0" /><published>2019-11-05T00:00:00+01:00</published><updated>2019-11-05T00:00:00+01:00</updated><id>http://localhost:4000/2019/11/05/nushell-0_5_0</id><content type="html" xml:base="http://localhost:4000/2019/11/05/nushell-0_5_0.html">&lt;p&gt;Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.5">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2019-11-21T16:26:10+01:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">Nu Blog</title><subtitle>Blog to the Nu project.</subtitle><entry><title type="html">Nushell 0.5.0</title><link href="http://localhost:4000/2019/11/05/nushell-0_5_0.html" rel="alternate" type="text/html" title="Nushell 0.5.0" /><published>2019-11-05T00:00:00+01:00</published><updated>2019-11-05T00:00:00+01:00</updated><id>http://localhost:4000/2019/11/05/nushell-0_5_0</id><content type="html" xml:base="http://localhost:4000/2019/11/05/nushell-0_5_0.html">&lt;p&gt;Nushell, or Nu for short, is a new shell that takes a modern, structured approach to your commandline. It works seamlessly with the data from your filesystem, operating system, and a growing number of file formats to make it easy to build powerful commandline pipelines.&lt;/p&gt;
 
 &lt;p&gt;Today, we’re happy to announce the 0.5.0 release for Nu. We’ve got lots of new features, including some long-requested ones, in this release.&lt;/p&gt;
 
@@ -182,14 +182,14 @@ end_of_line = lf
 
 &lt;h2 id=&quot;new-colors-wycats&quot;&gt;New Colors (wycats)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/0_4_0_new_colors.png&quot; alt=&quot;Example of nushell&quot; /&gt;&lt;br /&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/0_4_0_new_colors.png&quot; alt=&quot;Example of nushell&quot; /&gt;&lt;br /&gt;
 New colors!&lt;/p&gt;
 
 &lt;p&gt;With 0.4.0, we’re adding some new colors to show off different types of the command, where errors might be happening, and if the command is internal or external. The coloring is just the tip of the iceberg, as it were, and builds from a reworking of the parser to make it more accurate, more stable, and more feature-complete.&lt;/p&gt;
 
 &lt;h2 id=&quot;streaming-table-jonathandturner&quot;&gt;Streaming table (jonathandturner)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/0_4_0_streaming_table.gif&quot; alt=&quot;Animation of a long table streaming out&quot; /&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/0_4_0_streaming_table.gif&quot; alt=&quot;Animation of a long table streaming out&quot; /&gt;
 Streaming tables&lt;/p&gt;
 
 &lt;p&gt;Up to this point, we’ve taken a few shortcuts with how streams worked in Nushell.  We knew that a table, in theory, was a stream of rows. In practice, though, this wasn’t the case as the code has lots of assumptions about how tables worked.&lt;/p&gt;
@@ -244,11 +244,11 @@ Streaming tables&lt;/p&gt;
 
 &lt;h2 id=&quot;new-table-design-porges-jonathandturner&quot;&gt;New table design (Porges, jonathandturner)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/utf8_table.png&quot; alt=&quot;Table with utf8 box drawing&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/utf8_table.png&quot; alt=&quot;Table with utf8 box drawing&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;One of the most striking differences is that Nu now uses UTF-8 box drawing to draw its tables.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/utf8_light_table.png&quot; alt=&quot;Table with utf8 box drawing in light mode&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/utf8_light_table.png&quot; alt=&quot;Table with utf8 box drawing in light mode&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The table is also configurable. If you feel like the table is a bit too heavy, you can also configure it to work in light mode using this command:&lt;/p&gt;
 
@@ -277,7 +277,7 @@ Streaming tables&lt;/p&gt;
 
 &lt;h2 id=&quot;error-improvements-jonathandturner&quot;&gt;Error improvements (jonathandturner)&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/did_you_mean.png&quot; alt=&quot;Improve error messages&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/did_you_mean.png&quot; alt=&quot;Improve error messages&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We’ve made steady progress on improving error messages. Recently, we added “did you mean?” errors to help when you mistype the name of columns. Nu 0.3.0 also has gone through a few passes to generally polish the errors to include more information when an error occurs.&lt;/p&gt;
 
@@ -319,7 +319,7 @@ Streaming tables&lt;/p&gt;
 
 &lt;p&gt;This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino, with contributions from Odin Dutton.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nushell-autocomplete4.gif&quot; alt=&quot;Nu in action&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nushell-autocomplete4.gif&quot; alt=&quot;Nu in action&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;but-why&quot;&gt;But why?&lt;/h1&gt;
 
@@ -333,19 +333,19 @@ Streaming tables&lt;/p&gt;
 
 &lt;p&gt;To Nu, everything is data.  When you type &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, you’re given a table of information about the directory you’re listing:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nu_ls.png&quot; alt=&quot;ls command&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nu_ls.png&quot; alt=&quot;ls command&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Rather than having to remember different flags to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt;, we can just work with the data it gives back. We can find the files greater than a certain size:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nu_ls_filter.png&quot; alt=&quot;ls with filtering&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nu_ls_filter.png&quot; alt=&quot;ls with filtering&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Or we could choose to sort it by a column, or only show directories, or more. That by itself is fun but perhaps not compelling enough.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nu_ps_filter.png&quot; alt=&quot;ps with filtering&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nu_ps_filter.png&quot; alt=&quot;ps with filtering&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we’re using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from.  Nu pushes this idea even further.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/open_cargo.png&quot; alt=&quot;opening toml file&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/open_cargo.png&quot; alt=&quot;opening toml file&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Nu also understands structured text files like JSON, TOML, YAML, and more. Opening these files gives us the same tables we saw with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ls&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ps&lt;/code&gt;. Again, this lets us use the same commands to filter our data, explore it, and use it.&lt;/p&gt;
 
@@ -512,19 +512,19 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
 
 &lt;p&gt;As we built Nu, we realized we could experiment with other parts of how a shell works. The first of these experiments lead us to an observation: if everything is data in Nu, we should be able to view this data.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/view_source.png&quot; alt=&quot;viewing source file&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/view_source.png&quot; alt=&quot;viewing source file&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We’ve seen the tables. Nu also supports opening and looking at text and binary data. If we open a source file, we can scroll around in a syntax-highlighted file. If we open an xml, we can look at its data. We can even open a binary file and look at what’s inside (hint: there’s even a fun easter egg if you open certain kinds binary files, especially if you’ve installed Nu with the optional &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;rawkey&lt;/code&gt; feature).&lt;/p&gt;
 
 &lt;p&gt;Being able to view data is helpful, and this kind of polish extends to other aspects, like error messages:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nu_error2.png&quot; alt=&quot;simple error&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nu_error2.png&quot; alt=&quot;simple error&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Nu takes heavy inspiration from the &lt;a href=&quot;https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html&quot;&gt;error messages in Rust&lt;/a&gt;. As much as possible, draw your eyes to the problem.&lt;/p&gt;
 
 &lt;p&gt;Combined with the pipeline, some pretty interesting errors are possible:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/nu_error_metadata.png&quot; alt=&quot;error with metadata&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://www.nushell.sh/blog/images/nu_error_metadata.png&quot; alt=&quot;error with metadata&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;You might wonder how does that even work. Nu has a metadata system (still early!) that you can read about in the &lt;a href=&quot;https://book.nushell.sh/en/metadata&quot;&gt;Metadata chapter&lt;/a&gt; of the &lt;a href=&quot;https://book.nushell.sh&quot;&gt;Nu book&lt;/a&gt;. Let’s just take a quick peek at it:&lt;/p&gt;
 
