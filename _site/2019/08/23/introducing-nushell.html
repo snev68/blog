@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en-US">
-    <link rel="icon" type="image/png" href="/images/link.png">
+    <link rel="icon" type="image/png" href="https://www.nushell.sh/blog/images/link.png">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +22,7 @@
 {"headline":"Introducing nushell","dateModified":"2019-08-23T00:00:00+02:00","datePublished":"2019-08-23T00:00:00+02:00","author":{"@type":"Person","name":"Jonathan Turner"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/08/23/introducing-nushell.html"},"description":"Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.","@type":"BlogPosting","url":"http://localhost:4000/2019/08/23/introducing-nushell.html","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-        <link rel="stylesheet" href="/assets/css/style.css?v=5aabb7c98e7ad798063afbe8107dd78d3259c516">
+        <link rel="stylesheet" href="/assets/css/style.css?v=31d7f4a890ec3d0578d9938649ae5d58494eaf01">
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <script src="/assets/js/respond.js"></script>
         <!--[if lt IE 9]>
@@ -40,7 +40,7 @@
         <div id="header">
 <nav>
         <a class="back" href="/">Nu Blog</a>
-        <li class="button"><a href="http://www.nushell.sh">Visit our Website</a></li>
+        <li class="button"><a href="https://www.nushell.sh">Visit our Website</a></li>
 </nav>
 </div>
   </div><!-- end header -->
@@ -60,7 +60,7 @@
 
 <p>This release was made by Jonathan Turner (me), Yehuda Katz, and Andrés Robalino, with contributions from Odin Dutton.</p>
 
-<p><img src="/images/nushell-autocomplete4.gif" alt="Nu in action" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nushell-autocomplete4.gif" alt="Nu in action" /></p>
 
 <h1 id="but-why">But why?</h1>
 
@@ -74,19 +74,19 @@
 
 <p>To Nu, everything is data.  When you type <code class="language-plaintext highlighter-rouge">ls</code>, you’re given a table of information about the directory you’re listing:</p>
 
-<p><img src="/images/nu_ls.png" alt="ls command" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nu_ls.png" alt="ls command" /></p>
 
 <p>Rather than having to remember different flags to <code class="language-plaintext highlighter-rouge">ls</code>, we can just work with the data it gives back. We can find the files greater than a certain size:</p>
 
-<p><img src="/images/nu_ls_filter.png" alt="ls with filtering" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nu_ls_filter.png" alt="ls with filtering" /></p>
 
 <p>Or we could choose to sort it by a column, or only show directories, or more. That by itself is fun but perhaps not compelling enough.</p>
 
-<p><img src="/images/nu_ps_filter.png" alt="ps with filtering" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nu_ps_filter.png" alt="ps with filtering" /></p>
 
 <p>Where this simple concept - that everything in Nu is data - starts to shine when we try other commands and realize that we’re using the same commands to filter, to sort, etc. Rather than having the need to remember all the parameters to all the commands, we can just use the same verbs to act over our data, regardless of where the data came from.  Nu pushes this idea even further.</p>
 
-<p><img src="/images/open_cargo.png" alt="opening toml file" /></p>
+<p><img src="https://www.nushell.sh/blog/images/open_cargo.png" alt="opening toml file" /></p>
 
 <p>Nu also understands structured text files like JSON, TOML, YAML, and more. Opening these files gives us the same tables we saw with <code class="language-plaintext highlighter-rouge">ls</code> and <code class="language-plaintext highlighter-rouge">ps</code>. Again, this lets us use the same commands to filter our data, explore it, and use it.</p>
 
@@ -253,19 +253,19 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
 
 <p>As we built Nu, we realized we could experiment with other parts of how a shell works. The first of these experiments lead us to an observation: if everything is data in Nu, we should be able to view this data.</p>
 
-<p><img src="/images/view_source.png" alt="viewing source file" /></p>
+<p><img src="https://www.nushell.sh/blog/images/view_source.png" alt="viewing source file" /></p>
 
 <p>We’ve seen the tables. Nu also supports opening and looking at text and binary data. If we open a source file, we can scroll around in a syntax-highlighted file. If we open an xml, we can look at its data. We can even open a binary file and look at what’s inside (hint: there’s even a fun easter egg if you open certain kinds binary files, especially if you’ve installed Nu with the optional <code class="language-plaintext highlighter-rouge">rawkey</code> feature).</p>
 
 <p>Being able to view data is helpful, and this kind of polish extends to other aspects, like error messages:</p>
 
-<p><img src="/images/nu_error2.png" alt="simple error" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nu_error2.png" alt="simple error" /></p>
 
 <p>Nu takes heavy inspiration from the <a href="https://blog.rust-lang.org/2016/08/10/Shape-of-errors-to-come.html">error messages in Rust</a>. As much as possible, draw your eyes to the problem.</p>
 
 <p>Combined with the pipeline, some pretty interesting errors are possible:</p>
 
-<p><img src="/images/nu_error_metadata.png" alt="error with metadata" /></p>
+<p><img src="https://www.nushell.sh/blog/images/nu_error_metadata.png" alt="error with metadata" /></p>
 
 <p>You might wonder how does that even work. Nu has a metadata system (still early!) that you can read about in the <a href="https://book.nushell.sh/en/metadata">Metadata chapter</a> of the <a href="https://book.nushell.sh">Nu book</a>. Let’s just take a quick peek at it:</p>
 
@@ -369,7 +369,7 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
 <footer>
         <div class="author">
            <center>
-                  <img src="/images/jonathanturner.png" height=140>
+                  <img src="https://www.nushell.sh/blog/images/jonathanturner.png" height=140>
 
                   <h4>by <a href="https://twitter.com/jntrnr">Jonathan Turner
               </a></h4>
