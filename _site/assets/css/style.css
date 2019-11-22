@@ -206,7 +206,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 .highlight .ss { color: #90a959; }
 
-body { padding: 0px 0 20px 0px; margin: 0px; font: 14px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #585858; font-weight: normal; background: #ffffff; background-attachment: fixed !important; }
+body { padding: 0px 0 20px 0px; margin: 0px; font: 16px/1.5 "OpenSansRegular", "Helvetica Neue", Helvetica, Arial, sans-serif; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color: #585858; font-weight: normal; background: #ffffff; background-attachment: fixed !important; }
 
 h1, h2, h3, h4, h5, h6 { color: #242424; margin: 0 0 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight: normal; }
 
@@ -263,7 +263,7 @@ footer { font-size: 12px; color: #9e9e9e; max-width: 650px; margin: 2px auto; pa
 footer .credits { font-size: 11px; font-family: 'OpenSansRegular', "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight: normal; color: #696969; margin-top: -10px; }
 footer .credits.left { float: left; }
 footer .credits.right { float: right; }
-footer .author { background-position: center; object-position: center; background: #ededed; border-radius: 8px; width: 25%; padding-top: 10px; padding-bottom: 1px; mask-position: center; position: relative; object-position: center; margin-left: auto; margin-right: auto; margin-top: auto; }
+footer .author { background-position: center; object-position: center; background: #ededed; border-radius: 8px; width: min-content; padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 1px; mask-position: center; position: relative; object-position: center; margin-left: auto; margin-right: auto; margin-top: auto; }
 footer .author a { color: #387304; font-weight: normal; }
 footer .author img { border-radius: 8px; }
 
