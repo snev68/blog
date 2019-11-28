@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en-US">
-    <link rel="icon" type="image/png" href="https://www.nushell.sh/blog/images/link.png">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Begin Jekyll SEO tag v2.5.0 -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/png" href="https://www.nushell.sh/blog/images/link.png">
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
 <title>Introducing nushell | Nu Blog</title>
 <meta name="generator" content="Jekyll v3.8.5" />
 <meta property="og:title" content="Introducing nushell" />
@@ -17,44 +17,35 @@
 <meta property="og:url" content="http://localhost:4000/2019/08/23/introducing-nushell.html" />
 <meta property="og:site_name" content="Nu Blog" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2019-08-23T00:00:00+12:00" />
+<meta property="article:published_time" content="2019-08-23T00:00:00+02:00" />
 <script type="application/ld+json">
-{"@type":"BlogPosting","headline":"Introducing nushell","dateModified":"2019-08-23T00:00:00+12:00","datePublished":"2019-08-23T00:00:00+12:00","url":"http://localhost:4000/2019/08/23/introducing-nushell.html","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/08/23/introducing-nushell.html"},"author":{"@type":"Person","name":"Jonathan Turner"},"description":"Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.","@context":"http://schema.org"}</script>
+{"headline":"Introducing nushell","dateModified":"2019-08-23T00:00:00+02:00","datePublished":"2019-08-23T00:00:00+02:00","author":{"@type":"Person","name":"Jonathan Turner"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2019/08/23/introducing-nushell.html"},"description":"Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.","@type":"BlogPosting","url":"http://localhost:4000/2019/08/23/introducing-nushell.html","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
-        <link rel="stylesheet" href="/assets/css/style.css?v=c7157efae81eaf855d9770e609ba399c9b6c3f8c">
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-        <script src="/assets/js/respond.js"></script>
-        <!--[if lt IE 9]>
-          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
-        <!--[if lt IE 8]>
-        <link rel="stylesheet" href="/assets/css/ie.css">
-        <![endif]-->
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    
-      </head>
+  <link rel="stylesheet" href="/assets/css/style.css?v=6b470f0652cb705e1e23c87d585b80c20688a5c2">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script src="/assets/js/respond.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
 <body>
   <div id="header">
-        <div id="header">
-<nav>
-        <a class="back" href="/">Nu Blog</a>
-        <li class="button"><a href="https://www.nushell.sh">Visit our Website</a></li>
+    <nav>
+    <a class="back" href="/">Nu Blog</a>
+    <div class="right">
+        <a class="button" href="https://www.nushell.sh">Visit our Website</a>
+    </div>
 </nav>
-</div>
+
   </div><!-- end header -->
 
-<div class="wrapper">
+  <div class="wrapper">
+    <section>
+      <div id="title">
+        <h1>Introducing nushell</h1>
+      </div>
 
-  <section>
-    <div id="title">
-      <h1>Introducing nushell</h1>
-      <hr>
-      
-    </div>
-
-    <p>Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.</p>
+      <p>Today, we’re introducing a new shell, written in Rust. It draws inspiration from the classic Unix philosophy of pipelines, the structured data approach of PowerShell, functional programming, systems programming, and more.</p>
 
 <p>It’s called Nushell, or just Nu for short.  We have a <a href="https://book.nushell.sh/en">book</a> (¡también se habla <a href="https://book.nushell.sh/es">Español</a>!). We have a <a href="https://github.com/nushell/nushell">repo</a>.</p>
 
@@ -359,10 +350,16 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
 
 <p>If you want to give it a spin, the <a href="https://book.nushell.sh/en/installation">installation instructions</a> will help you get started. If you want to chat come by our <a href="https://discord.gg/NtAbbGn">discord</a> and <a href="https://github.com/nushell/nushell">github</a></p>
 
+    </section>
+  </div>
 
-  </section>
-
-</div>
+  <footer>
+    <div class="author">
+      <img src="https://www.nushell.sh/blog/images/jonathanturner.png" height="140" alt="author">
+      by
+      <a href="https://twitter.com/jntrnr">Jonathan Turner</a>
+   </div>
+  </footer>
 
 
   <script>
@@ -375,18 +372,19 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
   </script>
 
 
-<footer>
-        <div class="author">
-           <center>
-                  <img src="https://www.nushell.sh/blog/images/jonathanturner.png" height=140>
-
-                  <h4>by <a href="https://twitter.com/jntrnr">Jonathan Turner
-              </a></h4>
-             
-           </center>
-       </div>
-</footer>
-
+<script type="text/javascript">
+    $('h1, h2, h3, h4, h5, h6').filter('[id]').each(function () {
+        var el = document.createElement('a');
+        el.className = 'anchor';
+        el.href = '#' + this.id;
+        this.prepend(el)
+    });
+    $('pre code').each(function () {
+        this.innerHTML = this.innerHTML.replace(/\u2501{1,8}|\u2500{1,8}|\u252f|\u253c|\u2537|\u2502/g, function (s) {
+            return '<u style="width:' + s.length + 'ch">' + s + '</u>';
+        });
+    });
+</script>
 </body>
 </html>
    
