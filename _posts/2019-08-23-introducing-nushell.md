@@ -47,7 +47,7 @@ The above approach could be fun, but if we're not careful, it could become a wal
 
 First, let's take a look at working with a file that Nu doesn't understand.
 
-```
+```shell
 > open people.psv
 Octavia | Butler | Writer
 Bob | Ross | Painter
@@ -56,7 +56,7 @@ Antonio | Vivaldi | Composer
 
 To work with this in Nu, we need to do two steps: figure out where the rows are, and then figure out what the columns are. The rows are pretty easy, we just have one record per row:
 
-```
+```shell
 > open people.psv | lines
 ---+------------------------------
  # | value 
@@ -69,7 +69,7 @@ To work with this in Nu, we need to do two steps: figure out where the rows are,
 
 Next, we can create our columns by splitting each row at the pipe (`|`) symbol:
 
-```
+```shell
 > open people.psv | lines | split-column "|"
 ---+----------+-----------+-----------
  # | Column1  | Column2   | Column3 
@@ -82,7 +82,7 @@ Next, we can create our columns by splitting each row at the pipe (`|`) symbol:
 
 That's already good enough that we can work with the data. We can go a step further and name the columns if we want:
 
-```
+```shell
 > open people.psv | lines | split-column " | " firstname lastname job
 ---+-----------+----------+----------
  # | firstname | lastname | job 
@@ -95,7 +95,7 @@ That's already good enough that we can work with the data. We can go a step furt
 
 But what about working with commands outside of Nu? Let's first call the native version of `ls` instead of the Nu version:
 
-```
+```shell
 > ^ls
 assets	     Cargo.lock  docs	images	 Makefile.toml	README.md     rustfmt2.toml  src     tests
 Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   target
@@ -103,7 +103,7 @@ Cargo2.toml  Cargo.toml  extra	LICENSE  open		readonly.txt  rustfmt.toml   targe
 
 We'll use the same commands we used on data to bring it into Nu:
 
-```
+```shell
 ^ls | split-row " " file
 ----+---------------
  #  | value 
@@ -130,7 +130,7 @@ We'll use the same commands we used on data to bring it into Nu:
 
 Or maybe we want to work with the native `ls -la`:
 
-```
+```shell
 ^ls -la | lines | split-column " "
 ----+------------+---------+----------+----------+---------+---------+---------+---------+---------------
  #  | Column1    | Column2 | Column3  | Column4  | Column5 | Column6 | Column7 | Column8 | Column9 
@@ -166,7 +166,7 @@ Or maybe we want to work with the native `ls -la`:
 
 After a bit of experimenting, we might come up with a command like this:
 
-```
+```shell
 > ^ls -la | lines | skip 1 | split-column " " perms files group user size month day time name
 ----+------------+-------+----------+----------+--------+-------+-----+-------+---------------
  #  | perms      | files | group    | user     | size   | month | day | time  | name 
@@ -203,7 +203,7 @@ Because Nu let's you manipulate your data until it's how you want it, there's a 
 
 Oh, before I forget - I wanted to quickly show how to get data from Nu back out into the outside world. Here's an example of calling `echo` on each filename in a directory:
 
-```
+```shell
 > ls | get name | echo $it
 ```
 
@@ -229,7 +229,7 @@ Combined with the pipeline, some pretty interesting errors are possible:
 
 You might wonder how does that even work. Nu has a metadata system (still early!) that you can read about in the [Metadata chapter](https://book.nushell.sh/en/metadata) of the [Nu book](https://book.nushell.sh). Let's just take a quick peek at it:
 
-```
+```shell
 > open Cargo.toml
 ------------+--------------+------------------+----------+----------
  bin        | dependencies | dev-dependencies | lib      | package 
@@ -252,7 +252,7 @@ Let's say you're in a directory, but you'd really like to flip back and forth be
 
 In Nu, we can `enter` a directory, which adds it to a ring of shells we can bounce between:
 
-```
+```shell
 > enter ../rhai/
 /home/jonathan/Source/rhai(master)> shells
 ---+---+------------+-------------------------------
@@ -267,7 +267,7 @@ Using `n` and `p` we can jump back and forth between the shells. `exit` gets us 
 
 You might noticed that `name` column in the `shells` table. Why's that there?  Oh no... oh yes.
 
-```
+```shell
 > enter Cargo.toml
 /> shells
 ---+---+--------------------------------------------+-------------------------------
@@ -281,7 +281,7 @@ You might noticed that `name` column in the `shells` table. Why's that there?  O
 
 That's right, we're in the file.  Can we `cd`? Oh yes, we can:
 
-```
+```shell
 /> ls
 ------------+--------------+------------------+----------+----------
  bin        | dependencies | dev-dependencies | lib      | package 
