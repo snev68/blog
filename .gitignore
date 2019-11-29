@@ -2,5 +2,6 @@
 .jekyll-cache
 .jekyll-metadata
 vendor
+_site/
 *.iml
 .idea/

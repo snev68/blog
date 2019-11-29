@@ -1,4 +1,28 @@
 @font-face {
+    font-family: 'Source Code Pro';
+    src: url('../fonts/SourceCodePro-Regular.eot');
+    src: local('Source Code Pro Regular'),
+         url('../fonts/SourceCodePro-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/SourceCodePro-Regular.woff') format('woff'),
+         url('../fonts/SourceCodePro-Regular.ttf') format('truetype'),
+         url('../fonts/SourceCodePro-Regular.svg#SourceCodePro') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('../fonts/SourceCodePro-Bold.eot');
+  src: local('Source Code Pro Bold'),
+       url('../fonts/SourceCodePro-Bold.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/SourceCodePro-Bold.woff') format('woff'),
+       url('../fonts/SourceCodePro-Bold.ttf') format('truetype'),
+       url('../fonts/SourceCodePro-Bold.svg#SourceCodePro') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
     font-family: 'OpenSans';
     src: url('../fonts/OpenSans-Light-webfont.eot');
     src: local('Open Sans Light'),
