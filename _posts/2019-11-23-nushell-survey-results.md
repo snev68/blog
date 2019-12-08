@@ -2,7 +2,7 @@
 title: Nushell 2019 Survey Results
 author: Jonathan Turner
 author_site: https://twitter.com/jntrnr
-author_image: https://www.nushell.sh/blog/images/jonathanturner.png
+author_image: https://www.nushell.sh/blog/images/jonathandturner.jpg
 ---
 
 Recently, we ran a short survey to see how you were feeling about [Nushell](https://github.com/nushell/nushell). We wanted to give a very hearty "thank you!" to everyone who participated. These surveys are a great way to gather information about how people are feeling, where they're happy, and where they feel there are pain points.
