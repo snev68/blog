@@ -1,6 +1,6 @@
 # blog
 
-This repository contains the source for the [Nu Blog](http://blog.nushell.sh/). The website is hosted on GitHub Pages and uses the static site generator [jekyll](https://jekyllrb.com/).
+This repository contains the source for the [Nu Blog](http://www.nushell.sh/blog/). The website is hosted on GitHub Pages and uses the static site generator [jekyll](https://jekyllrb.com/).
 
 ## Posts
 
