@@ -57,7 +57,7 @@ In Nu, these two steps are distinct. The `echo` command gets data ready to outpu
 
 That's because both `echo` and `ls` are lazy commands. They'll only do the work if the data is pulled from the stream. As a result, the step of viewing the data is separate from the step of creating it.
 
-Behind the scenes, Nu converts a standalone `ls` to be the pipeline `ls | autoview`. The work of viewing comes from `autoview` and it handles working with the data and calling the proper viewer. In this way, we're able to keep things as structured data for as long as possible, and only convert it to be displayed as the final step before being shown to the user.
+Behind the scenes, Nu converts a standalone `ls` to be the pipeline `ls | autoview`. The work of viewing comes from `autoview` and it handles working with the data and calling the proper viewer. In this way, we're able to keep things as structured data for as long as possible, and only convert it to be displayed as the final step before being shown to the user. (note: the wasm-based demo and jupyter do a similar step, but instead of adding `autoview`, they add `to html`)
 
 ## Rich data types
 
