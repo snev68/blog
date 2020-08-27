@@ -67,7 +67,7 @@ Numbers are represented internally as big numbers and big decimals, rather than 
 
 We carry this further, by also representing values common in modern computer usage: URLs, file paths, file sizes, durations, and dates are all examples of built-in data types. By building them in, Nu can have better syntax and type checking with their use.
 
-For example, in Nu it's possible to write `= 1min + 1sec` to create a duration that is one minute one second long.  You can also use the file sizes, like being able to filter a directory list by the size of the file `ls | where size > 10kb`.
+For example, in Nu it's possible to write `= 1min + 1sec` to create a duration that is one minute one second long. You can also use the file sizes, like being able to filter a directory list by the size of the file `ls | where size > 10kb`.
 
 Nu also can help if you try to mix types that shouldn't. For example, if you had written: `= 1min + 1kb` it seems you didn't mean to add time and file sizes together, and Nu gives you an error if you do:
 
@@ -187,7 +187,7 @@ You can also see a few other steps thrown in, like the expansion of a short-hand
 
 Being able to use `-` in the names of commands, sometimes called "kebab case", is a handy feature and one we enjoy. In Nu, you can use it whenever you need to pass an identifier. `kebab-case-rules`.
 
-In addition to kebab case, you can use `?` as part of the identifier, allowing you names in a Ruby-style. We use it in the command `empty?`.
+In addition to kebab case, you can use `?` as part of the identifier, allowing names in a Ruby-style. We use it in the command `empty?`.
 
 ## Code growth
 
@@ -246,7 +246,7 @@ That being said, it's not without its trade-offs. To some folks, rotating the ta
 
 Nushell is in the stage of the project where we're still experimenting with what the language should be, how it works in practice, and finding out what its most important core values are. Rust, the language Nushell is written in, went through a similar stage. As it found its most important values, it tried on others. Once people started to create real projects in Rust, and show what was possible with this core part of the language, the design began to gel and then solidify as it arrived at 1.0. As part of that, early ideas were modified or discarded altogether.
 
-Nushell will go through a similar stage. As it grows, it will find its sweet spot, it's niche that it naturally fills. The design will come from features built to solve real problems, and we'll polish these features, improving their utility, error messages, documentation, and overall flow. The end result will be a sharper, more focused Nushell that feels like the tool you want in your toolbox. Some early adopters are already giving us feedback that Nushell is well on its way of meeting this role, and we're excited to continue to explore and refine as we go.
+Nushell will go through a similar stage. As it grows, it will find its sweet spot, its niche that it naturally fills. The design will come from features built to solve real problems, and we'll polish these features, improving their utility, error messages, documentation, and overall flow. The end result will be a sharper, more focused Nushell that feels like the tool you want in your toolbox. Some early adopters are already giving us feedback that Nushell is well on its way of meeting this role, and we're excited to continue to explore and refine as we go.
 
 ## Exploring the data model
 
