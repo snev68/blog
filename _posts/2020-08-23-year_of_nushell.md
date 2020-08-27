@@ -267,4 +267,3 @@ We had far more support and made far more progress than we could have ever predi
 If you'd like to try out Nu, you can download it from the [github releases page](https://github.com/nushell/nushell/releases), from [crates.io](https://crates.io/crates/nu), or from the many [other distributions](https://repology.org/project/nushell/versions).
 
 If you'd like to help us create Nu, please do! You can find us on the [Nushell github](https://github.com/nushell/nushell) and on our [discord server](https://discord.gg/NtAbbGn). If you use Twitter, [come say hi](https://twitter.com/nu_shell), we'd love to chat.
-
